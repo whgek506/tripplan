@@ -7,12 +7,11 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
 @Getter
-@Table
+@Table(name = "schedule")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Schedule {
     @Id
@@ -35,6 +34,12 @@ public class Schedule {
     @Column(name = "schedule_category")
     private String scheduleCategory;
 
+    @Column(name = "schedule_link_title")
+    private String scheduleLinkTitle;
+
+    @Column(name = "schedule_link")
+    private String scheduleLink;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "plan_id")
     private Plan plan;
@@ -45,19 +50,23 @@ public class Schedule {
         plan.getSchedules().add(this);
     }
 
-    public void addSchedule(String scheduleTitle, String scheduleMemo, LocalTime startTime, LocalTime endTime, String scheduleCategory) {
+    public void addSchedule(String scheduleTitle, String scheduleMemo, LocalTime startTime, LocalTime endTime, String scheduleCategory, String scheduleLink, String scheduleLinkTitle) {
         this.scheduleTitle = scheduleTitle;
         this.scheduleMemo = scheduleMemo;
         this.startTime = startTime;
         this.endTime = endTime;
         this.scheduleCategory = scheduleCategory;
+        this.scheduleLinkTitle = scheduleLinkTitle;
+        this.scheduleLink = scheduleLink;
     }
 
     //생성 메서드
     public static Schedule createSchedule(Plan plan, ScheduleDto scheduleDto) {
         Schedule schedule = new Schedule();
         schedule.addPlan(plan);
-        schedule.addSchedule(scheduleDto.getScheduleTitle(), scheduleDto.getScheduleMemo(), scheduleDto.getStartTime(), scheduleDto.getEndTime(), scheduleDto.getScheduleCategory());
+        schedule.addSchedule(scheduleDto.getScheduleTitle(), scheduleDto.getScheduleMemo(),
+                            scheduleDto.getStartTime(), scheduleDto.getEndTime(), scheduleDto.getScheduleCategory(),
+                            scheduleDto.getScheduleTitle(), scheduleDto.getScheduleLinkTitle());
 
         return schedule;
     }

@@ -3,7 +3,6 @@ package com.project.tripplan.plan.controller;
 import com.project.tripplan.plan.dto.PlanDto;
 import com.project.tripplan.plan.dto.PlanReponseDto;
 import com.project.tripplan.plan.dto.PlanUpdateDto;
-import com.project.tripplan.plan.entity.Plan;
 import com.project.tripplan.plan.service.PlanService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

@@ -17,7 +17,4 @@ public class Country {
 
     @Column(name = "country_name")
     private String countryName;
-
-    @Column(name = "country_currency")
-    private String countryCurrency;
 }

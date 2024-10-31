@@ -1,5 +1,6 @@
 package com.project.tripplan.plan.entity;
 
+import com.project.tripplan.plan.dto.PlanDto;
 import com.project.tripplan.schedule.entity.Schedule;
 import jakarta.persistence.*;
 import lombok.*;
@@ -38,7 +39,7 @@ public class Plan {
     @Column(name = "plan_image")
     private String planImage;
 
-    @OneToMany(mappedBy = "plan", cascade = ALL)
+    @OneToMany(mappedBy = "plan")
     private List<Schedule> schedules = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -47,13 +48,13 @@ public class Plan {
 
 
     //비즈니스 로직
-//    public void addPlan(String planTitle, LocalDate startDate, LocalDate endDate, LocalDateTime planCreated, String planImage) {
-//        this.planTitle = planTitle;
-//        this.startDate = startDate;
-//        this.endDate = endDate;
-//        this.planCreated = LocalDateTime.now();
-//        this.planImage = planImage;
-//    }
+    public void addPlan(String planTitle, LocalDate startDate, LocalDate endDate, LocalDateTime planCreated, String planImage) {
+        this.planTitle = planTitle;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.planCreated = LocalDateTime.now();
+        this.planImage = planImage;
+    }
 
     public void updatePlan(String planTitle, LocalDate startDate, LocalDate endDate) {
         this.planTitle = planTitle;

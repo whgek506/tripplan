@@ -25,7 +25,7 @@ public class PlanService {
     //계획 등록
     @Transactional
     public void savePlans(PlanDto dto) {
-       Optional<City> city = cityRepository.findByCityName(dto.getCity());
+       Optional<City> city = cityRepository.findByCityName(String.valueOf(dto.getCity()));
         if(city.isPresent()) {
             Plan plan = planRespository.save(Plan.builder()
                     .planTitle(dto.getPlanTitle())
